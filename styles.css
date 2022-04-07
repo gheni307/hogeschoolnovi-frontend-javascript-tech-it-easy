@@ -1,0 +1,24 @@
+#opdracht {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    //border: 1px solid black;
+}
+
+#test\ of\ total\ price {
+    color: green;
+}
+
+body {
+    height: 100%;
+    background-color: darksalmon;
+}
+#text\ of\ number\ of\ purchase\ of\ tv {
+    color: blue;
+}
+
+#text\ of\ still\ to\ be\ sold {
+    color: red;
+}
