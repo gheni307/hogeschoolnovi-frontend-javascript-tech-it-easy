@@ -161,3 +161,121 @@ const inventory = [
     sold: 8,
   },
 ];
+
+//Opdracht 1a: Gebruik een array-methode om een array te maken met alle tv-type namen. Log de uitkomst in de console.
+const nameOfTvType = inventory.map((tvType) => {
+  return 'tv-type: ' + tvType.type;
+});
+console.log(nameOfTvType);
+
+//Opdracht 1b: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die volledig uitverkocht zijn. Log de uitkomst in de console.
+const tvOfSold = inventory.filter(soldTv => soldTv.sold === soldTv.originalStock);
+console.log(tvOfSold);
+
+//Opdracht 1c: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die over AmbiLight beschikken. Log de uitkomst in de console.
+const tvOfAmbiLight = inventory.filter((ambiLight) => {
+  return ambiLight.options.ambiLight === true;
+});
+console.log(tvOfAmbiLight);
+
+//Opdracht 1d: Schrijf een functie die alle tv's van laagste naar hoogste prijs sorteert. Log de uitkomst in de console.
+const sortPrice = inventory.sort((a,b) => {
+  return a.price - b.price;
+});
+console.log(sortPrice);
+
+// Opdracht 2 - Elementen in de DOM plaatsen
+
+// Hoeveel tv's zijn er al verkocht? Schrijf een script dat dit berekent. Log de uitkomst in de console.
+
+const priceTotal = function (){
+  let total = 0;
+  for (let i = 0; i < inventory.length; i++) {
+    total += inventory[i].price;
+  }
+  return total;
+}
+console.log(priceTotal());
+
+// Opdracht 2b: Zorg ervoor dat dit aantal in het groen wordt weergegeven op de pagina.
+const totalPrice = document.getElementById('total price');
+const textOfTotalPrice = document.getElementById('test of total price');
+totalPrice.onclick = function (){
+  let priceOfTotal = 0;
+  for (let i = 0; i < inventory.length; i++) {
+    priceOfTotal = priceOfTotal + inventory[i].price;
+  }
+  textOfTotalPrice.innerHTML = `total price of sold uit is ${priceOfTotal}.`;
+}
+
+// Opdracht 2c: Hoeveel tv's heeft Tech It Easy ingekocht? Schrijf een script dat dit berekent. Log de uitkomst in de console.
+const ingekochtTV = function (){
+  let totalIngekochtTV = 0;
+  for (let i = 0; i < inventory.length; i++) {
+    totalIngekochtTV = totalIngekochtTV + inventory[i].originalStock;
+  }
+  return totalIngekochtTV;
+}
+console.log(ingekochtTV());
+
+// Opdracht 2d: Zorg ervoor dat dit aantal in het blauw wordt weergegeven op de pagina.
+const numberOfPurchased = document.getElementById('number of tv');
+const textOfNumberOfPurchased = document.getElementById('text of number of purchase of tv')
+numberOfPurchased.onclick = function (){
+  textOfNumberOfPurchased.innerHTML = `total purchased tv is ${ingekochtTV()}`;
+}
+
+// Opdracht 2e: Geef in het rood weer hoeveel tv's er nog verkocht moeten worden.
+const stillToBeSold = document.getElementById('still to be sold');
+const textOfStillToBeSold = document.getElementById('text of still to be sold');
+const soldOfTotal = function (){
+  let totalSold = 0;
+  for (let i = 0; i < inventory.length; i++) {
+    totalSold = totalSold + inventory[i].sold;
+  }
+  return totalSold;
+}
+console.log(soldOfTotal());
+stillToBeSold.onclick = function (){
+  const totalStillToSold = ingekochtTV() - soldOfTotal();
+  textOfStillToBeSold.innerHTML = `total of still to be sold is ${totalStillToSold}.`;
+}
+
+// Opdracht 3 - Array methoden en functies
+
+/*
+* Opdracht 3a: Gebruik een array-methode om alle tv merken (zoals Philips, NIKKEI, etc.)
+* in een lijst op de pagina weer te geven. Zorg ervoor dat dit ook zou werken als
+* we 200 tv's in onze array zouden hebben staan. Dat er dubbele namen in zitten, is niet erg.
+*
+* Opdracht 3b: Schrijf de code uit 3a om naar een functie die een array met tv-objecten verwacht.
+* Het is handig om onze scripts als functies op te zetten, zodat we ze gemakkelijk kunnen hergebruiken.
+* Tip: vergeet deze functie -declaratie niet aan te roepen!
+* */
+const alOfTVs = document.getElementById('al of tvs');
+let writeBrandOfTv = document.getElementById('write brand of tv');
+const numberOfAlTv = inventory.map((brandOfTv) => {
+  return brandOfTv.brand;
+});
+alOfTVs.onclick = function (){
+    writeBrandOfTv.innerHTML = `<p>${numberOfAlTv}<p>`
+}
+
+// Opdracht 4 -Functies
+
+const infoList = document.getElementById('inf-list');
+const infoListSpen = document.getElementById('info-list-text');
+infoList.onclick = function (){
+  for (let i = 0; i < inventory.length; i++) {
+    let inch = 0;
+    let info = 0;
+    info = `<p>${inventory[i].brand} ${inventory[i].type} ${inventory[i].name}</p><p>€${inventory[i].price},-<p/>`
+      for (let j = 0; j < inventory[i].availableSizes.length; j++) {
+        (function () {
+          inch += `<span>${inventory[i].availableSizes[j]} inch (${Math.floor(inventory[i].availableSizes[j] * 2.56)} cm) | </span>`
+        })();
+      }
+      infoListSpen.innerHTML += `${info}${inch}<p>#########<p/>`;
+  }
+}
+
