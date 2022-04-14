@@ -191,7 +191,7 @@ console.log(sortPrice);
 const priceTotal = function (){
   let total = 0;
   for (let i = 0; i < inventory.length; i++) {
-    total = total + inventory[i].price;
+    total += inventory[i].price;
   }
   return total;
 }
