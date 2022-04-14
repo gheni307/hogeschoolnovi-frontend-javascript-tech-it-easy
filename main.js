@@ -169,9 +169,7 @@ const nameOfTvType = inventory.map((tvType) => {
 console.log(nameOfTvType);
 
 //Opdracht 1b: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die volledig uitverkocht zijn. Log de uitkomst in de console.
-const tvOfSold = inventory.filter((soldTv) => {
-  return soldTv.sold > 0;
-    });
+const tvOfSold = inventory.filter(soldTv => soldTv.sold === soldTv.originalStock);
 console.log(tvOfSold);
 
 //Opdracht 1c: Gebruik een array-methode om alle tv's te verzamelen (de hele objecten) die over AmbiLight beschikken. Log de uitkomst in de console.
